@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 // definimos el esquema de los anuncios
 const anuncioSchema = mongoose.Schema({
-  nombre: String,
-  venta: Boolean, 
-  precio: Number,
-  foto: String, 
-  tags: [String]
+  nombre: { type: String, required: true, index: true},
+  venta: { type: Boolean, required: true, index: true}, 
+  precio: { type: Number, required: true, index: true},
+  foto: { type: String, required: true},
+  tags: { type: [String], required:true, index: true}
 });
 
 // método listar que utilizaremos para paginar la búsqueda

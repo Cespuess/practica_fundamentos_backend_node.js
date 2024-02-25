@@ -108,7 +108,7 @@ async function inicializaAnuncios() {
       "nombre" : "Teclado mecánico EASYTAO",
       "venta" : true,
       "precio" : 220,
-      "foto" : "camiseta_blanca.jpg",
+      "foto" : "teclado.jpg",
       "tags" : [ "lifestyle" ]
     }
      

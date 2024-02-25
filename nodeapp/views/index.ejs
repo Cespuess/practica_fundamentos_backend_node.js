@@ -2,10 +2,27 @@
 <html>
   <head>
     <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/pico.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <h2>Catálogo</h2>
+    <main class="container">
+      <% if (error) {%>
+        <div class="error">
+          <p><%= error %></p>
+        </div>
+      <% } else { %>
+        <% anuncios.forEach(anuncio => {%>
+        <div class="producto">
+          <h5 id="nombre"><%= anuncio.nombre %></h5>
+          <p id="precio">Precio: <%= anuncio.precio %>€</p>
+          <img src="/images/<%=anuncio.foto %>" alt=<%= anuncio.nombre %>>
+        </div>
+        <%}) %>
+      <%} %> 
+    </main>
   </body>
 </html>

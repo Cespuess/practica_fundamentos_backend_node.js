@@ -1,10 +1,10 @@
 {
-  "name": "nodeapp",
+  "name": "nodepop",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "cross-env NODEAPP_ENV=production node ./bin/www",
-    "dev": "cross-env NODEAPP_ENV=development DEBUG=nodeapp:* nodemon ./bin/www",
+    "dev": "cross-env NODEAPP_ENV=development DEBUG=nodepop:* nodemon ./bin/www",
     "init-db": "node init-db.js"
   },
   "dependencies": {

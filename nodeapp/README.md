@@ -25,6 +25,8 @@ npm run dev
 
 ## API
 
+#### Para consultar la lista completa:
+
 GET /api/anuncios
 
 ```json
@@ -43,3 +45,7 @@ GET /api/anuncios
   ]
 }
 ```
+
+#### Para consultar con posibilidad de paginación y ordenación:
+
+GET /api/anuncios?skip=2&limit=6&sort=precio
