@@ -9,6 +9,17 @@ const anuncioSchema = mongoose.Schema({
   tags: [String]
 });
 
+// método listar que utilizaremos para paginar la búsqueda
+anuncioSchema.statics.listar = function(filtro, skip, limit, sort, fields) {
+  const query = Anuncio.find(filtro);
+  query.skip(skip);
+  query.limit(limit);
+  query.sort(sort);
+  query.select(fields);
+
+  return query.exec(); // devuelve una promesa
+}
+
 // creamos el modelo de anuncio
 const Anuncio = mongoose.model('Anuncio', anuncioSchema);
 
