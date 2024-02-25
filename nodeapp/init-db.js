@@ -70,13 +70,6 @@ async function inicializaAnuncios() {
       "tags" : [ "work" ]
     },
     {
-      "nombre" : "Iphone 13",
-      "venta" : false,
-      "precio" : 949,
-      "foto" : "iphone_13.jpg",
-      "tags" : [ "mobile", "work" ]
-    },
-    {
       "nombre" : "Fiat 500",
       "venta" : true,
       "precio" : 14800,
