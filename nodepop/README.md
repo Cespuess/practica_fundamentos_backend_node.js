@@ -131,3 +131,12 @@ Anuncio guardado satisfactoriamente:
 }
 ```
 
+#### Eliminar un anuncio:
+
+- DELETE /api/anuncios/<_id>
+
+![alt text](image-3.png)
+
+```html
+Producto "Fiat 500" eliminado.
+```

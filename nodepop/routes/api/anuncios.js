@@ -24,7 +24,6 @@ async function (req, res, next) {
 
 // crear un anuncio
 router.post('/', async (req, res, next) => {
-  const tags = ['work', 'lifestyle', 'motor', 'mobile']
   try {
     const data = req.body;
 
@@ -66,5 +65,17 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
+// DELETE /api/anuncios/<_id>
+// Eliminar un anuncio
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const producto = await Anuncio.find({_id: id});
+    await Anuncio.deleteOne({_id: id});
+    res.send(`Producto "${producto[0].nombre}" eliminado.`)
+  } catch (error) {
+    next(error);
+  }
+})
 
 module.exports = router;
