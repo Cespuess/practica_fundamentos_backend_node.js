@@ -53,3 +53,10 @@ GET /api/anuncios?skip=2&limit=6&sort=precio
 #### Para consultar por campos: 
 
 GET /api/anuncios?precio=55
+
+#### Para consultar por rangos de precio:
+
+GET /api/anuncios?precio_min=110&precio_max=600
+
+Si se especifica en la query el campo precio junto con precio_min y/o precio_max, se dará prioridad a la búsqueda por rango de precio. Los valores tendrán que ser de tipo numérico.
+

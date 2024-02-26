@@ -18,41 +18,51 @@ function pregunta(texto) {
 }
 
 function listado(req, modelo) {
-   // describimos los tipos de filtrado
-   const filterByNombre = req.query.nombre;
-   const filterByVenta = req.query.venta;
-   const filterByPrecio = req.query.precio;
-   const filterByTags = req.query.tags;
+  // describimos los tipos de filtrado
+  const filterByNombre = req.query.nombre;
+  const filterByVenta = req.query.venta;
+  const filterByPrecio = req.query.precio;
+  const filterPrecioMin = req.query.precio_min;
+  const filterPrecioMax = req.query.precio_max;
+  const filterByTags = req.query.tags;
 
-   // paginación
-   const skip = req.query.skip;
-   const limit = req.query.limit;
+  console.log(filterPrecioMax, filterPrecioMin);
 
-   // ordenación
-   const sort = req.query.sort;
+  // paginación
+  const skip = req.query.skip;
+  const limit = req.query.limit;
 
-   // seleccionar por campos
-   const fields = req.query.fields;
+  // ordenación
+  const sort = req.query.sort;
 
-   // Creamos un objeto filter para introducir los filtros que nos pasen para la consulta
-   const filter = {};
+  // seleccionar por campos
+  const fields = req.query.fields;
 
-   if (filterByNombre) {
-     filter.nombre = filterByNombre;
-   }
-   if (filterByVenta) {
-     filter.venta = filterByVenta;
-   }
-   if (filterByPrecio) {
-     filter.precio = filterByPrecio;
-   }
-   if (filterByTags) {
-     filter.tags = filterByTags;
-   }
+  // Creamos un objeto filter para introducir los filtros que nos pasen para la consulta
+  const filter = {};
 
-   const anuncios = modelo.listar(filter, skip, limit, sort, fields);
+  if (filterByNombre) {
+    filter.nombre = filterByNombre;
+  }
+  if (filterByVenta) {
+    filter.venta = filterByVenta;
+  }
+  if (filterByPrecio) {
+    filter.precio = filterByPrecio;
+  }
+  if (filterPrecioMin || filterPrecioMax) {
+    let res = {};
+    if (filterPrecioMin) res.$gte = filterPrecioMin;
+    if (filterPrecioMax) res.$lte = filterPrecioMax;
+    filter.precio = res;  // priorizamos la búsqueda por rango por si se indica tambien el precio en la query.
+  }
+  if (filterByTags) {
+    filter.tags = filterByTags;
+  }
+  console.log(filter);
+  const anuncios = modelo.listar(filter, skip, limit, sort, fields);
    
-   return anuncios;
+  return anuncios;
 }
 
 module.exports = {pregunta, listado};
