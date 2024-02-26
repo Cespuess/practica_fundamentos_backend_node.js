@@ -32,7 +32,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // errores de validación
+  // errores de validación en /api/anuncios
   if (err.array) {
     const errInfo = err.array({})[0];
     err.message = `Campo no válido - ${errInfo.type} ${errInfo.path} in ${errInfo.location} ${errInfo.msg}`;

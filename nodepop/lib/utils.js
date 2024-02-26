@@ -26,7 +26,6 @@ function listado(req, modelo) {
   const filterPrecioMax = req.query.precio_max;
   const filterByTags = req.query.tags;
 
-  console.log(filterByNombre);
 
   // paginación
   const skip = req.query.skip;
@@ -59,7 +58,7 @@ function listado(req, modelo) {
   if (filterByTags) {
     filter.tags = filterByTags;
   }
-  console.log(filter);
+  
   const anuncios = modelo.listar(filter, skip, limit, sort, fields);
    
   return anuncios;

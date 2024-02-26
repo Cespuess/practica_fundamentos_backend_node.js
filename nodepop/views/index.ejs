@@ -4,6 +4,7 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="/stylesheets/pico.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="shortcut icon" href="/images/nodepopIcon.png" type="image/x-icon">
   </head>
   <body>
     <h1><%= title %></h1>
@@ -21,7 +22,7 @@
           <% if (anuncio.venta) { %> <p>Se vende</p> <% } 
           else { %> <p>Se compra</p> <%}  %> 
           <p id="tags">Categoria: <% anuncio.tags.forEach(tag => {%>
-          <span> <%= tag %></span>  <%}) %></p>
+          <span> "<%= tag %>"</span>  <%}) %></p>
           <p id="precio">Precio: <%= anuncio.precio %>€</p>
           <img src="/images/<%=anuncio.foto %>" alt=<%= anuncio.nombre %>>
         </div>

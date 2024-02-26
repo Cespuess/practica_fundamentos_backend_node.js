@@ -10,13 +10,18 @@ const validacionPrecioMax = query('precio_max').isNumeric().optional().withMessa
 // Validar que "venta" sea bool
 const validacionVenta = query('venta').isBoolean().optional().withMessage('Tiene que ser true o false');
 
-// Validar tags
-const tags = ['work', 'lifestyle', 'motor', 'mobile'];
+// Validar tags que esten en la lista en peticiones GET 
 const validacionTags = query('tags').custom(value => {
-  return tags.includes(value);
+  const tags = ['work', 'lifestyle', 'motor', 'mobile'];
+  if (Array.isArray(value)) { // si lo que recibimos es un array comprobamos si cada elemento está en la lista de tags
+    if (value.every(tag => tags.includes(tag))) return true;  
+  } else {
+    if (tags.includes(value)) return true;    
+  }
 }).optional().withMessage('El tag tiene que ser uno de los siguientes: work, lifestyle, motor, mobile.')
 
-// Validamos que los tags que nos ha introducido esten en la array de tags.
+
+// Validamos tags que esten en la lista en peticiones POST y PUT
 function validarTagsBody(body) {
   const arrayTags = ['work', 'lifestyle', 'motor', 'mobile']
   if (Array.isArray(body.tags)) {
