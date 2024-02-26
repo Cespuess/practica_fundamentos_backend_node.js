@@ -60,3 +60,8 @@ GET /api/anuncios?precio_min=110&precio_max=600
 
 Si se especifica en la query el campo precio junto con precio_min y/o precio_max, se dará prioridad a la búsqueda por rango de precio. Los valores tendrán que ser de tipo numérico.
 
+#### Para consultar por nombre:
+
+GET /api/anuncios?nombre=logi
+
+No hace falta especificar el nombre entero, solo escribir una parte que contenga el título del producto ya es suficiente.

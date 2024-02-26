@@ -8,12 +8,13 @@ const {validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, v
 // GET users listing
 
 // devuelve una lista de anuncios entera o con filtros
-router.get('/', [validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax], async function(req, res, next) {
+router.get('/', [validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax], 
+async function (req, res, next) {
   try {
     validationResult(req).throw(); // lanza el error si alguna validación no ha pasado
     const anuncios = await listado(req, Anuncio);
     res.json({ resultados: anuncios });
-  
+
   } catch (error) {
     next(error);
   }

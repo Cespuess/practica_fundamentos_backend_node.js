@@ -26,7 +26,7 @@ function listado(req, modelo) {
   const filterPrecioMax = req.query.precio_max;
   const filterByTags = req.query.tags;
 
-  console.log(filterPrecioMax, filterPrecioMin);
+  console.log(filterByNombre);
 
   // paginación
   const skip = req.query.skip;
@@ -42,7 +42,7 @@ function listado(req, modelo) {
   const filter = {};
 
   if (filterByNombre) {
-    filter.nombre = filterByNombre;
+    filter.nombre = new RegExp(filterByNombre, 'i');
   }
   if (filterByVenta) {
     filter.venta = filterByVenta;

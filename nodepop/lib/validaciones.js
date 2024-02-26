@@ -16,4 +16,9 @@ const validacionTags = query('tags').custom(value => {
   return tags.includes(value);
 }).optional().withMessage('El tag tiene que ser uno de los siguientes: work, lifestyle, motor, mobile.')
 
+// Validación nombre artículo que empiece por ...
+
+
+
+
 module.exports = {validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax};
