@@ -20,4 +20,30 @@ async function (req, res, next) {
   }
 });
 
+// POST /api/anuncios
+
+// crear un anuncio
+router.post('/', async (req, res, next) => {
+  const tags = ['work', 'lifestyle', 'motor', 'mobile']
+  try {
+    const data = req.body;
+    console.log(data.tags);
+    if (data.tags.every(tag => tags.includes(tag))) { // verificamos que los tags que nos ha introducido esten en la array de tags.
+      // creamos una instancia del anuncio
+      const anuncio = new Anuncio(data);
+      
+      // lo guardamos en la BD
+      const anuncioGuardado = await anuncio.save();
+  
+      res.send(`Anuncio guardado satisfactoriamente: \n ${anuncioGuardado }`);
+    } else {
+      throw new Error ('Tag incorrecto: (work, lifestyle, motor, mobile)');
+    }
+  } catch (error) {
+      next(error);
+  }
+})
+
+
+
 module.exports = router;

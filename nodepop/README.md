@@ -46,27 +46,27 @@ npm run dev
 }
 ```
 
-#### Para consultar con posibilidad de paginación y ordenación:
+#### Consultar con posibilidad de paginación y ordenación:
 
 - GET /api/anuncios?skip=2&limit=6&sort=precio
 
-#### Para consultar por campos: 
+#### Consultar por campos: 
 
 - GET /api/anuncios?precio=55
 
-#### Para consultar por rangos de precio:
+#### Consultar por rangos de precio:
 
 - GET /api/anuncios?precio_min=110&precio_max=600
 
 Si se especifica en la query el campo precio junto con precio_min y/o precio_max, se dará prioridad a la búsqueda por rango de precio. Los valores tendrán que ser de tipo numérico.
 
-#### Para consultar por nombre:
+#### Consultar por nombre:
 
 - GET /api/anuncios?nombre=logi
 
 No hace falta especificar el nombre entero, solo escribir una parte que contenga el título del producto ya es suficiente.
 
-#### Para consultar solo los campos seleccionados:
+#### Consultar solo los campos seleccionados:
 
 - GET /api/anuncios?fields=nombre%20-_id
 
@@ -82,6 +82,23 @@ Con este ejemplo recibimos solo los nombres de los productos sin el _id.
     "nombre": "Móvil Iphone 13"
     },
   ]
+}
+```
+
+#### Crear un anuncio:
+
+- POST /api/anuncios
+
+```html
+Anuncio guardado satisfactoriamente:
+{
+nombre: 'monitor',
+venta: true,
+precio: 300,
+foto: 'monitor.jpg',
+tags: [ 'work', 'lifestyle' ],
+_id: new ObjectId('65dc93763a42132fb7e79100'),
+__v: 0
 }
 ```
 
