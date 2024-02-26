@@ -8,4 +8,10 @@ const validacionPrecio = query('precio').isNumeric().optional().withMessage('Tie
 // Validar que "venta" sea bool
 const validacionVenta = query('venta').isBoolean().optional().withMessage('Tiene que ser true o false');
 
-module.exports = {validacionPrecio, validacionVenta};
+// Validar tags
+const tags = ['work', 'lifestyle', 'motor', 'mobile'];
+const validacionTags = query('tags').custom(value => {
+  return tags.includes(value);
+}).optional().withMessage('El tag tiene que ser uno de los siguientes: work, lifestyle, motor, mobile.')
+
+module.exports = {validacionPrecio, validacionVenta, validacionTags};
