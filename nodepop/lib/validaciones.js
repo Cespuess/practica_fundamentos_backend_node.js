@@ -16,9 +16,17 @@ const validacionTags = query('tags').custom(value => {
   return tags.includes(value);
 }).optional().withMessage('El tag tiene que ser uno de los siguientes: work, lifestyle, motor, mobile.')
 
-// Validación nombre artículo que empiece por ...
+// Validamos que los tags que nos ha introducido esten en la array de tags.
+function validarTagsBody(body) {
+  const arrayTags = ['work', 'lifestyle', 'motor', 'mobile']
+  if (Array.isArray(body.tags)) {
+    if (!body.tags.every(tag => arrayTags.includes(tag))) throw new Error ('Tag incorrecto: (work, lifestyle, motor, mobile)');  
+  } else {
+    if (!tags.includes(body.tags)) throw new Error ('Tag incorrecto: (work, lifestyle, motor, mobile)');    
+  }
+}
 
 
 
 
-module.exports = {validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax};
+module.exports = {validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax, validarTagsBody};

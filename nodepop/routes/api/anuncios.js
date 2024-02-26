@@ -3,7 +3,7 @@ var router = express.Router();
 const Anuncio = require('../../models/Anuncio');
 const {listado} = require('../../lib/utils');
 const {validationResult} = require('express-validator');
-const {validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax} = require('../../lib/validaciones');
+const {validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax, validarTagsBody} = require('../../lib/validaciones');
 
 // GET users listing
 
@@ -27,23 +27,44 @@ router.post('/', async (req, res, next) => {
   const tags = ['work', 'lifestyle', 'motor', 'mobile']
   try {
     const data = req.body;
-    console.log(data.tags);
-    if (data.tags.every(tag => tags.includes(tag))) { // verificamos que los tags que nos ha introducido esten en la array de tags.
-      // creamos una instancia del anuncio
-      const anuncio = new Anuncio(data);
-      
-      // lo guardamos en la BD
-      const anuncioGuardado = await anuncio.save();
+
+    // verificamos que los tags que nos ha introducido esten en la array de tags.
+    validarTagsBody(data)
+    
+    // creamos una instancia del anuncio
+    const anuncio = new Anuncio(data);
+    
+    // lo guardamos en la BD
+    const anuncioGuardado = await anuncio.save();
+
+    res.send(`Anuncio guardado satisfactoriamente: \n ${anuncioGuardado }`);
   
-      res.send(`Anuncio guardado satisfactoriamente: \n ${anuncioGuardado }`);
-    } else {
-      throw new Error ('Tag incorrecto: (work, lifestyle, motor, mobile)');
-    }
+    
   } catch (error) {
       next(error);
   }
 })
 
+
+// PUT /api/anuncios/<_id>  (body)
+// Actualizar un anuncio
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const data = req.body;
+
+    // verificamos que los tags que nos ha introducido esten en la array de tags.
+    validarTagsBody(data)
+
+    const anuncioActualizado = await Anuncio.findByIdAndUpdate( id, data, {new: true})
+    
+    res.send(`Anuncio modificado satisfactioriamente \n ${anuncioActualizado}`);
+
+  } catch (error) {
+    next(error);
+  }
+})
 
 
 module.exports = router;

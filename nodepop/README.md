@@ -87,18 +87,47 @@ Con este ejemplo recibimos solo los nombres de los productos sin el _id.
 
 #### Crear un anuncio:
 
-- POST /api/anuncios
+- POST /api/anuncios (body)
+
+Body:
+
+![alt text](image-2.png)
+
+Respuesta:
 
 ```html
 Anuncio guardado satisfactoriamente:
 {
-nombre: 'monitor',
-venta: true,
-precio: 300,
-foto: 'monitor.jpg',
-tags: [ 'work', 'lifestyle' ],
-_id: new ObjectId('65dc93763a42132fb7e79100'),
-__v: 0
+  nombre: 'monitor',
+  venta: true,
+  precio: 300,
+  foto: 'monitor.jpg',
+  tags: [ 'work', 'lifestyle' ],
+  _id: new ObjectId('65dc93763a42132fb7e79100'),
+  __v: 0
+}
+```
+
+#### Modificar un anuncio:
+
+- PUT /api/anuncios/<_id>  (body)
+
+Body:
+
+![alt text](image-1.png)
+
+Respuesta:
+
+```html
+Anuncio guardado satisfactoriamente:
+{
+  nombre: 'avion',
+  venta: true,
+  precio: 300,
+  foto: 'monitor.jpg',
+  tags: [ 'lifestyle' ],
+  _id: new ObjectId('65dca5f9a9b88ee29187de50'),
+  __v: 0
 }
 ```
 
