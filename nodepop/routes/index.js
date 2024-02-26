@@ -11,6 +11,7 @@ router.get('/', [validacionPrecio, validacionVenta, validacionTags, validacionPr
   try {
     validationResult(req).throw(); // lanza el error si alguna validación no ha pasado
     const anuncios = await listado(req, Anuncio);
+    console.log(anuncios[2].tags);
     res.render('index', { title: 'Nodepop', anuncios: anuncios, error: false });
  
   } catch (error) {

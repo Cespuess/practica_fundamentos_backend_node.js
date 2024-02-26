@@ -18,6 +18,8 @@
         <% anuncios.forEach(anuncio => {%>
         <div class="producto">
           <h5 id="nombre"><%= anuncio.nombre %></h5>
+          <p id="tags">Categoria: <% anuncio.tags.forEach(tag => {%>
+          <span> <%= tag %></span>  <%}) %></p>
           <p id="precio">Precio: <%= anuncio.precio %>€</p>
           <img src="/images/<%=anuncio.foto %>" alt=<%= anuncio.nombre %>>
         </div>
