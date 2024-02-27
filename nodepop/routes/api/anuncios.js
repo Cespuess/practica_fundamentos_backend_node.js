@@ -3,7 +3,7 @@ var router = express.Router();
 const Anuncio = require('../../models/Anuncio');
 const {listado} = require('../../lib/utils');
 const {validationResult} = require('express-validator');
-const {validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax, validarTagsBody} = require('../../lib/validaciones');
+const {validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax, validacionBodyTagsCreate} = require('../../lib/validaciones');
 
 // GET users listing
 
@@ -23,12 +23,12 @@ async function (req, res, next) {
 // POST /api/anuncios
 
 // crear un anuncio
-router.post('/', async (req, res, next) => {
+router.post('/',validacionBodyTagsCreate, async (req, res, next) => {
   try {
+    console.log(req.body.tags);
+    validationResult(req).throw();
     const data = req.body;
 
-    // verificamos que los tags que nos ha introducido esten en la array de tags.
-    validarTagsBody(data)
     
     // creamos una instancia del anuncio
     const anuncio = new Anuncio(data);
@@ -48,13 +48,10 @@ router.post('/', async (req, res, next) => {
 // PUT /api/anuncios/<_id>  (body)
 // Actualizar un anuncio
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', validacionBodyTagsCreate, async (req, res, next) => {
   try {
     const id = req.params.id;
     const data = req.body;
-
-    // verificamos que los tags que nos ha introducido esten en la array de tags.
-    validarTagsBody(data)
 
     const anuncioActualizado = await Anuncio.findByIdAndUpdate( id, data, {new: true})
     

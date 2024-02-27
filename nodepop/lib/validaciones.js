@@ -1,7 +1,9 @@
 'use strict';
 
-const {query} = require('express-validator');
+const {query, body} = require('express-validator');
 
+
+// Validadores query----------------------------------------------------------------------------------------
 // Validar que el precio, precio_min y precio_max sea numérico
 const validacionPrecio = query('precio').isNumeric().optional().withMessage('Tiene que ser numérico.');
 const validacionPrecioMin = query('precio_min').isNumeric().optional().withMessage('Tiene que ser numérico.');
@@ -20,18 +22,21 @@ const validacionTags = query('tags').custom(value => {
   }
 }).optional().withMessage('El tag tiene que ser uno de los siguientes: work, lifestyle, motor, mobile.')
 
-
-// Validamos tags que esten en la lista en peticiones POST y PUT
-function validarTagsBody(body) {
+// Validadores body------------------------------------------------------------------------------------------------------
+// Validamos tags que esten en la lista en peticiones 
+const validacionBodyTagsCreate = body('tags').custom(value => {
   const arrayTags = ['work', 'lifestyle', 'motor', 'mobile']
-  if (Array.isArray(body.tags)) {
-    if (!body.tags.every(tag => arrayTags.includes(tag))) throw new Error ('Tag incorrecto: (work, lifestyle, motor, mobile)');  
+  if (Array.isArray(value)) {
+    if (value.every(tag => arrayTags.includes(tag))) return true;  
   } else {
-    if (!tags.includes(body.tags)) throw new Error ('Tag incorrecto: (work, lifestyle, motor, mobile)');    
+    if (arrayTags.includes(value)) return true; 
   }
-}
+}).withMessage('El tag tiene que ser uno de los siguientes: work, lifestyle, motor, mobile.')
 
 
 
 
-module.exports = {validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax, validarTagsBody};
+
+
+
+module.exports = {validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax, validacionBodyTagsCreate};
