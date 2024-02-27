@@ -25,7 +25,7 @@ function listado(req, modelo) {
   const filterPrecioMin = req.query.precio_min;
   const filterPrecioMax = req.query.precio_max;
   const filterByTags = req.query.tags;
-
+  const filterById = req.query._id
 
   // paginación
   const skip = req.query.skip;
@@ -40,6 +40,9 @@ function listado(req, modelo) {
   // Creamos un objeto filter para introducir los filtros que nos pasen para la consulta
   const filter = {};
 
+  if (filterById) {
+    filter._id = filterById;
+  }
   if (filterByNombre) {
     filter.nombre = new RegExp(filterByNombre, 'i');
   }
