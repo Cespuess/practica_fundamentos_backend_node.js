@@ -6,7 +6,7 @@ const { validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, 
 const { validationResult } = require('express-validator');
 
 
-/* GET home page. */
+// GET home page
 router.get('/', [validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax, validacionNombre, validacionNoFieldsWeb], async function(req, res, next) {
   try {
     validationResult(req).throw(); // lanza el error si alguna validación no ha pasado
@@ -24,5 +24,31 @@ router.get('/', [validacionPrecio, validacionVenta, validacionTags, validacionPr
   }
 });
 
+// POST home page
+// crear anuncio con datos del formulario
+router.post('/', async function(req, res, next) {
+  console.log(req.body);
+  try {
+    if (!('tags' in req.body)) throw new Error('Hay que poner almenos un tag de la lista: work, lifestyle, motor, mobile.'); // controlamos que no cree anuncios sin tags
+    
+    validationResult(req).throw();
+    const data = req.body;
+
+    
+    // creamos una instancia del anuncio
+    const anuncio = new Anuncio(data);
+    
+    // lo guardamos en la BD
+    const anuncioGuardado = await anuncio.save();
+
+    res.redirect('/');
+    
+    
+  } catch (error) {
+    res.render('index', {title: 'Nodepop', error: error});
+
+  }
+
+})
 
 module.exports = router;
