@@ -25,6 +25,8 @@ async function (req, res, next) {
 // crear un anuncio
 router.post('/',[validacionBodyTags, validacionBodyNombre, validacionBodyVenta, validacionBodyPrecio, validacionBodyFoto], async (req, res, next) => {
   try {
+    if (!('tags' in req.body)) throw new Error('Hay que poner almenos un tag de la lista: work, lifestyle, motor, mobile.'); // controlamos que no cree anuncios sin tags
+    
     validationResult(req).throw();
     const data = req.body;
 

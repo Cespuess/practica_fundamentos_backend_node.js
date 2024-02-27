@@ -86,7 +86,7 @@ Términos de paginación y ordenación:
 
 - GET /api/anuncios?venta=true
 
-Indicamos el campo con el valor que queramos buscar.
+Indicamos el campo con el valor que queramos buscar: *_id, nombre, venta, precio y tags.*
 
 #### <u>Consultar por rangos de precio:</u>
 
@@ -174,3 +174,52 @@ Anuncio guardado satisfactoriamente:
 ```html
 Producto "Fiat 500" eliminado.
 ```
+
+## WEB
+
+#### <u>Diseño de la web:</u>
+
+Los productos se muestran uno encima de otro en el centro de la pantalla con el siguiente orden de información:
+
+1. Nombre del producto.
+2. Si se busca o se vende.
+3. La categoría (tag).
+4. El precio.
+5. La foto del producto.
+
+![Diseño web](./nodepop/public/images/readme/disenyo_web.png)
+
+#### <u>Para consultar la lista completa de productos:</u>
+
+* GET /
+
+#### <u>Consultar con posibilidad de paginación y ordenación:</u>
+
+- GET /?skip=2&limit=6&sort=precio
+
+Términos de paginación y ordenación:
+- **skip**: Es la cantidad de anuncios que se ignoran al principio. Tiene que ser numérico.
+- **limit**: Es la cantidad de anuncios que se mostrarán como máximo. Tiene que ser numérico. 
+- **sort**: Es el campo por el que se ordenarán los resultados. Los campos son: *_id, nombre, venta, precio, foto y tags.*
+
+#### <u>Consultar por campos:</u> 
+
+- GET /?venta=true
+
+Indicamos el campo con el valor que queramos buscar: *_id, nombre, venta, precio y tags.*
+
+#### <u>Consultar por rangos de precio:</u>
+
+- GET /?precio_min=110&precio_max=600
+
+Si se especifica en la query el campo *precio* junto con *precio_min* y/o *precio_max*, se dará prioridad a la búsqueda por rango de precio. Los valores tendrán que ser de tipo numérico.
+
+#### <u>Consultar por nombre:</u>
+
+- GET /?nombre=logi
+
+No hace falta especificar el nombre entero, solo escribir una parte que contenga el título del producto ya es suficiente.
+
+#### <u>Consultar solo los campos seleccionados:</u>
+
+Esta opción no está disponible en la web, solo en la API.

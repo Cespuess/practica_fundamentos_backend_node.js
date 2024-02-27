@@ -15,6 +15,9 @@ const validacionVenta = query('venta').isBoolean().optional().withMessage('Tiene
 // Validar nombre
 const validacionNombre = query('nombre').optional().notEmpty().withMessage('Tienes que poner algo como nombre a buscar.')
 
+// No dejar buscar por fields
+const validacionNoFieldsWeb = query('fields').not().exists().withMessage('Esta opción no está disponible en la web, solo en la API.')
+
 // Validar tags que esten en la lista 
 const validacionTags = query('tags').custom(value => {
   const tags = ['work', 'lifestyle', 'motor', 'mobile'];
@@ -23,7 +26,7 @@ const validacionTags = query('tags').custom(value => {
   } else {
     if (tags.includes(value)) return true;    
   }
-}).optional().withMessage('El tag tiene que estar en la lista siguiene: work, lifestyle, motor, mobile.');
+}).optional().withMessage('El tag tiene que estar en la lista siguiente: work, lifestyle, motor, mobile.');
 
 // Validadores body------------------------------------------------------------------------------------------------------
 // Validamos tags que esten en la lista en peticiones 
@@ -52,4 +55,4 @@ const validacionBodyFoto = body('foto').optional().notEmpty().withMessage('Tiene
 
 
 
-module.exports = {validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax, validacionBodyTags, validacionBodyNombre, validacionBodyVenta, validacionBodyPrecio, validacionBodyFoto, validacionNombre};
+module.exports = {validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax, validacionBodyTags, validacionBodyNombre, validacionBodyVenta, validacionBodyPrecio, validacionBodyFoto, validacionNombre, validacionNoFieldsWeb};

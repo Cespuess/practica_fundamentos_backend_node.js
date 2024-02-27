@@ -6,7 +6,7 @@ const anuncioSchema = mongoose.Schema({
   venta: { type: Boolean, required: true, index: true}, 
   precio: { type: Number, required: true, index: true},
   foto: { type: String, required: true},
-  tags: { type: [String], required:true, index: true}
+  tags: { type: [String], required: true, index: true}
 });
 
 // método listar que utilizaremos para paginar la búsqueda
