@@ -3,12 +3,12 @@ var router = express.Router();
 const Anuncio = require('../../models/Anuncio');
 const {listado} = require('../../lib/utils');
 const {validationResult} = require('express-validator');
-const {validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax, validacionBodyTagsCreate} = require('../../lib/validaciones');
+const {validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax, validacionBodyTags, validacionBodyNombre, validacionBodyVenta, validacionBodyPrecio, validacionBodyFoto, validacionNombre} = require('../../lib/validaciones');
 
 // GET users listing
 
 // devuelve una lista de anuncios entera o con filtros
-router.get('/', [validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax], 
+router.get('/', [validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax, validacionNombre], 
 async function (req, res, next) {
   try {
     validationResult(req).throw(); // lanza el error si alguna validación no ha pasado
@@ -23,9 +23,8 @@ async function (req, res, next) {
 // POST /api/anuncios
 
 // crear un anuncio
-router.post('/',validacionBodyTagsCreate, async (req, res, next) => {
+router.post('/',[validacionBodyTags, validacionBodyNombre, validacionBodyVenta, validacionBodyPrecio, validacionBodyFoto], async (req, res, next) => {
   try {
-    console.log(req.body.tags);
     validationResult(req).throw();
     const data = req.body;
 
@@ -48,8 +47,9 @@ router.post('/',validacionBodyTagsCreate, async (req, res, next) => {
 // PUT /api/anuncios/<_id>  (body)
 // Actualizar un anuncio
 
-router.put('/:id', validacionBodyTagsCreate, async (req, res, next) => {
+router.put('/:id', [validacionBodyTags, validacionBodyNombre, validacionBodyVenta, validacionBodyPrecio, validacionBodyFoto], async (req, res, next) => {
   try {
+    validationResult(req).throw();
     const id = req.params.id;
     const data = req.body;
 

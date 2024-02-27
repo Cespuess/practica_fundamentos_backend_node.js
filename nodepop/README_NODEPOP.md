@@ -78,7 +78,7 @@ Términos de paginación y ordenación:
 
 - GET /api/anuncios?venta=true
 
-Indicamos el campo con el valor que queramos buscar, el resultado de la búsqueda tiene que ser del valor exacto.
+Indicamos el campo con el valor que queramos buscar.
 
 #### <u>Consultar por rangos de precio:</u>
 
