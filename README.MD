@@ -229,3 +229,9 @@ Esta opción no está disponible en la web, solo en la API.
 ### v1.0.1
 * Mensaje inicial de la página web actualizado.
 * Los anuncios iniciales se han transladado de `init-db.js` a `anuncios.json` para mejorar la legibilidad del código y facilitar su mantenimiento.
+
+### v1.1
+* Se ha implementado un formulario en la página web que permite la creación de nuevos anuncios. 
+* Todos los campos son obligatorios, y se requiere seleccionar al menos una **categoría**. 
+
+![Formulario creación](./nodepop/public/images/readme/formulario_creacion.png)
