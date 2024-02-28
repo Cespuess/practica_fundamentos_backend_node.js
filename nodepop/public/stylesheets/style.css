@@ -19,6 +19,10 @@ body {
   border-radius: 10px;
 }
 
+#keepcoding {
+  color: orange;
+}
+
 #nombre {
   text-decoration: underline;
 }
