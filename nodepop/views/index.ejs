@@ -11,7 +11,7 @@
     <p>Bienvenidos a la aplicación número 1 de compra/venta de <span id="keepcoding">KeepCoding.</span></p>
 
     <h2>Crear anuncio</h2>
-    <form action="/" method="post" class="form">
+    <form action="/" method="post" class="form" enctype="multipart/form-data">
       <div class="form__crearAnuncio">
 
         <div class="form__campo">
@@ -34,7 +34,7 @@
 
         <fieldset class="form__campo">
           <Legend>Categoría del producto:</Legend>
-          <div id="checkbox_validador"></div>
+          <div id="validador"></div>
           <div class="form__campo__tags">
             <input type="checkbox" id="work" name="tags" value="work" >
             <label for="work">Work</label>
@@ -54,7 +54,7 @@
         </fieldset>
         <div class="form__campo">
           <label for="foto" class="form__label">Foto:</label>
-          <input type="text" id="foto" name="foto" placeholder="foto_anuncio.jpg" required>
+          <input type="file" id="foto" name="foto" accept=".jpg, .jpeg, .png" required>
         </div>
         <div class="form__campo form__campo __boton">
           <input type="submit" class="boton" value="Crear anuncio">

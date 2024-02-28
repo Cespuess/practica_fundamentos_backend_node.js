@@ -1,6 +1,7 @@
 'use strict';
 
 const readline = require('node:readline');
+const fs = require('node:fs');
 
 function pregunta(texto) {  
   // Hace la pregunta para asegurarnos de que no borramos sin querer la BBDD en main()
@@ -67,4 +68,10 @@ function listado(req, modelo) {
   return anuncios;
 }
 
-module.exports = {pregunta, listado};
+function renombrarImagen(imagen) {
+// renombramos el nombre de la imagen cargada del formulario para que se pueda mostrar en los anuncios
+  const newPath = `./public/images/${imagen.originalname}`
+  fs.renameSync(imagen.path, newPath)
+}
+
+module.exports = {pregunta, listado, renombrarImagen};

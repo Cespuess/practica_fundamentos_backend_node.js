@@ -235,3 +235,6 @@ Esta opción no está disponible en la web, solo en la API.
 * Todos los campos son obligatorios, y se requiere seleccionar al menos una **categoría**. 
 
 ![Formulario creación](./nodepop/public/images/readme/formulario_creacion.png)
+
+### v1.1.1
+* Se puede incluir imagen del producto al crear el anuncio con el formulario de la página web. Solo acepta formatos de imagen `.jpg`, `.jpeg` y `.png`.

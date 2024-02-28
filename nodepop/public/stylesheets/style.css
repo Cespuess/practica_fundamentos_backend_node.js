@@ -14,11 +14,11 @@ body {
   color: black;
 }
 
-#checkbox_validador:empty{ 
+#validador:empty{ 
   display: none;
 }
 
-#checkbox_validador {
+#validador {
   background-color: rgb(233, 195, 208);
   color: red;
   border-radius: 10px;
