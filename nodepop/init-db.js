@@ -3,6 +3,10 @@
 const connection = require('./lib/connectMongoose');
 const Anuncio = require('./models/Anuncio');
 const {pregunta} = require('./lib/utils');
+const path = require('path');
+const { URL } = require('url');
+const fs = require('fs').promises;
+
 
 async function main() {
   // Espera a que se conecte a la base de datos para reinicializar la BBDD
@@ -32,88 +36,17 @@ async function inicializaAnuncios() {
   const eliminados = await Anuncio.deleteMany();
   console.log(`Eliminados ${eliminados.deletedCount} anuncios`);
 
-  // creamos los anuncios iniciales y mostramos en consola la cantidad de documentos creados
-  const insertados = await Anuncio.insertMany([
-    {
-      "nombre" : "Móvil OPPO A78",
-      "venta" : true,
-      "precio" : 199,
-      "foto" : "oppo_a78.jpg",
-      "tags" : [ "mobile", "work" ]
-    },
-    {
-      "nombre" : "Móvil Iphone 13",
-      "venta" : false,
-      "precio" : 949,
-      "foto" : "iphone_13.jpg",
-      "tags" : [ "mobile", "work" ]
-    },
-    {
-      "nombre" : "Bambas Munich Mini Track",
-      "venta" : true,
-      "precio" : 30,
-      "foto" : "munich_mini_track.jpg",
-      "tags" : [ "lifestyle" ]
-    },
-    {
-      "nombre" : "Portátil Acer Nitro",
-      "venta" : true,
-      "precio" : 949,
-      "foto" : "acer_nitro.jpg",
-      "tags" : [ "work" ]
-    },
-    {
-      "nombre" : "Logitech Marathon Mouse",
-      "venta" : false,
-      "precio" : 42.99,
-      "foto" : "marathon_mouse.jpg",
-      "tags" : [ "work" ]
-    },
-    {
-      "nombre" : "Fiat 500",
-      "venta" : true,
-      "precio" : 14800,
-      "foto" : "fiat_500.jpg",
-      "tags" : [ "motor" ]
-    },
-    {
-      "nombre" : "Pantalones tejanos talla: 44",
-      "venta" : false,
-      "precio" : 15,
-      "foto" : "tejanos.jpg",
-      "tags" : [ "lifestyle" ]
-    },
-    {
-      "nombre" : "Honda Civic",
-      "venta" : false,
-      "precio" : 12350,
-      "foto" : "honda_civic.jpg",
-      "tags" : [ "motor" ]
-    },
-    {
-      "nombre" : "Móvil Samsung A14",
-      "venta" : true,
-      "precio" : 450,
-      "foto" : "samsung_a14.jpg",
-      "tags" : [ "mobile" ]
-    },
-    {
-      "nombre" : "Camiseta blanca talla XL",
-      "venta" : false,
-      "precio" : 5.50,
-      "foto" : "camiseta_blanca.jpg",
-      "tags" : [ "lifestyle" ]
-    },
-    {
-      "nombre" : "Teclado mecánico EASYTAO",
-      "venta" : true,
-      "precio" : 220,
-      "foto" : "teclado.jpg",
-      "tags" : [ "lifestyle" ]
-    }
-     
-  ]);
+  // importamos los anuncios iniciales y mostramos en consola la cantidad de documentos creados  
+  const insertados = await Anuncio.insertMany(await getAnuncios());
   console.log(`Creados ${insertados.length} anuncios`);
+}
+
+async function getAnuncios() {
+    const directorioActual = __dirname;
+    const url = new URL(`file:/${path.join(directorioActual, 'lib', 'anuncios.json')}`);
+    const data = await fs.readFile(url, 'utf8');
+    const result = JSON.parse(data);
+    return result.anuncios;  
 }
 
 

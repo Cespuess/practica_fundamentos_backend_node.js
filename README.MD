@@ -52,7 +52,7 @@ npm run dev
 
 #### <u> Para consultar la lista completa:</u>
 
-- GET /api/anuncios
+* `GET /api/anuncios`
 
 ```json
 {
@@ -73,7 +73,7 @@ npm run dev
 
 #### <u>Consultar con posibilidad de paginación y ordenación:</u>
 
-- GET /api/anuncios?skip=2&limit=6&sort=precio
+* ` GET /api/anuncios?skip=2&limit=6&sort=precio`
 
 Términos de paginación y ordenación:
 - **skip**: Es la cantidad de anuncios que se ignoran al principio. Tiene que ser numérico.
@@ -84,25 +84,25 @@ Términos de paginación y ordenación:
 
 #### <u>Consultar por campos:</u> 
 
-- GET /api/anuncios?venta=true
+* `GET /api/anuncios?venta=true`
 
 Indicamos el campo con el valor que queramos buscar: *_id, nombre, venta, precio y tags.*
 
 #### <u>Consultar por rangos de precio:</u>
 
-- GET /api/anuncios?precio_min=110&precio_max=600
+* `GET /api/anuncios?precio_min=110&precio_max=600`
 
 Si se especifica en la query el campo *precio* junto con *precio_min* y/o *precio_max*, se dará prioridad a la búsqueda por rango de precio. Los valores tendrán que ser de tipo numérico.
 
 #### <u>Consultar por nombre:</u>
 
-- GET /api/anuncios?nombre=logi
+* `GET /api/anuncios?nombre=logi`
 
 No hace falta especificar el nombre entero, solo escribir una parte que contenga el título del producto ya es suficiente.
 
 #### <u>Consultar solo los campos seleccionados:</u>
 
-- GET /api/anuncios?fields=nombre%20-_id
+* `GET /api/anuncios?fields=nombre%20-_id`
 
 Con este ejemplo recibimos solo los nombres de los productos sin el _id.
 
@@ -121,7 +121,7 @@ Con este ejemplo recibimos solo los nombres de los productos sin el _id.
 
 #### <u>Crear un anuncio:</u>
 
-- POST /api/anuncios (body)
+* `POST /api/anuncios (body)`
 
 Body:
 
@@ -144,7 +144,7 @@ Anuncio guardado satisfactoriamente:
 
 #### <u>Modificar un anuncio:</u>
 
-- PUT /api/anuncios/<_id>  (body)
+* `PUT /api/anuncios/<_id>  (body)`
 
 Body:
 
@@ -153,7 +153,7 @@ Body:
 Respuesta:
 
 ```html
-Anuncio guardado satisfactoriamente:
+Anuncio modificado satisfactoriamente:
 {
   nombre: 'avion',
   venta: true,
@@ -167,7 +167,7 @@ Anuncio guardado satisfactoriamente:
 
 #### <u>Eliminar un anuncio:</u>
 
-- DELETE /api/anuncios/<_id>
+* `DELETE /api/anuncios/<_id>`
 
 ![Eliminación anuncio](./nodepop/public/images/readme/eliminarAnuncio.png)
 
@@ -191,11 +191,11 @@ Los productos se muestran uno encima de otro en el centro de la pantalla con el 
 
 #### <u>Para consultar la lista completa de productos:</u>
 
-* GET /
+* `GET /`
 
 #### <u>Consultar con posibilidad de paginación y ordenación:</u>
 
-- GET /?skip=2&limit=6&sort=precio
+* `GET /?skip=2&limit=6&sort=precio`
 
 Términos de paginación y ordenación:
 - **skip**: Es la cantidad de anuncios que se ignoran al principio. Tiene que ser numérico.
@@ -204,22 +204,28 @@ Términos de paginación y ordenación:
 
 #### <u>Consultar por campos:</u> 
 
-- GET /?venta=true
+* `GET /?venta=true`
 
 Indicamos el campo con el valor que queramos buscar: *_id, nombre, venta, precio y tags.*
 
 #### <u>Consultar por rangos de precio:</u>
 
-- GET /?precio_min=110&precio_max=600
+* `GET /?precio_min=110&precio_max=600`
 
 Si se especifica en la query el campo *precio* junto con *precio_min* y/o *precio_max*, se dará prioridad a la búsqueda por rango de precio. Los valores tendrán que ser de tipo numérico.
 
 #### <u>Consultar por nombre:</u>
 
-- GET /?nombre=logi
+* `GET /?nombre=logi`
 
 No hace falta especificar el nombre entero, solo escribir una parte que contenga el título del producto ya es suficiente.
 
 #### <u>Consultar solo los campos seleccionados:</u>
 
 Esta opción no está disponible en la web, solo en la API.
+
+## Registro de cambios
+
+### v1.0.1
+* Mensaje inicial de la página web actualizado.
+* Los anuncios iniciales se han transladado de `init-db.js` a `anuncios.json` para mejorar la legibilidad del código y facilitar su mantenimiento.
