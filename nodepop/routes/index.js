@@ -27,28 +27,20 @@ router.get('/', [validacionPrecio, validacionVenta, validacionTags, validacionPr
 // POST home page
 // crear anuncio con datos del formulario
 router.post('/', async function(req, res, next) {
-  console.log(req.body);
-  try {
-    if (!('tags' in req.body)) throw new Error('Hay que poner almenos un tag de la lista: work, lifestyle, motor, mobile.'); // controlamos que no cree anuncios sin tags
-    
-    validationResult(req).throw();
+  try {   
     const data = req.body;
 
-    
     // creamos una instancia del anuncio
     const anuncio = new Anuncio(data);
     
     // lo guardamos en la BD
-    const anuncioGuardado = await anuncio.save();
-
-    res.redirect('/');
+    await anuncio.save();
     
+    res.redirect('/');    
     
   } catch (error) {
     res.render('index', {title: 'Nodepop', error: error});
-
   }
-
 })
 
 module.exports = router;
