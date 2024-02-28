@@ -8,6 +8,27 @@ body {
   align-items: center;
 }
 
+/* Formulario */
+
+.form__campo__tags input:checked + label {
+  color: black;
+}
+
+#checkbox_validador:empty{ 
+  display: none;
+}
+
+#checkbox_validador {
+  background-color: rgb(233, 195, 208);
+  color: red;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+/* Catálogo */
+
 .producto {
   width: 500px;
   padding: 10px;
