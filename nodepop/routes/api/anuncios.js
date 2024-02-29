@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const Anuncio = require('../../models/Anuncio');
 const {listado} = require('../../lib/utils');
+const fs = require('node:fs');
+const path = require('path');
 const {validationResult} = require('express-validator');
 const {validacionPrecio, validacionVenta, validacionTags, validacionPrecioMin, validacionPrecioMax, validacionBodyTags, validacionBodyNombre, validacionBodyVenta, validacionBodyPrecio, validacionBodyFoto, validacionNombre} = require('../../lib/validaciones');
 
@@ -70,6 +72,13 @@ router.delete('/:id', async (req, res, next) => {
   try {
     const id = req.params.id;
     const producto = await Anuncio.find({_id: id});
+    // borramos la foto del directorio images al eliminar el producto
+    const rutaBorrar = path.join(__dirname, `../../public/images/${producto[0].foto}`);
+    fs.unlinkSync(rutaBorrar, (error) => {
+      console.log(error);
+      if (error) throw new Error('Problema al borrar la imagen.')
+    })
+  
     await Anuncio.deleteOne({_id: id});
     res.send(`Producto "${producto[0].nombre}" eliminado.`)
   } catch (error) {

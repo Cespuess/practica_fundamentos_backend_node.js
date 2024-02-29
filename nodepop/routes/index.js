@@ -37,8 +37,7 @@ router.post('/', upload.single('foto'), async function(req, res, next) {
     data.foto = file.originalname;
     // renombramos la imagen recibida del formulario para que se guarde en la carpeta images
     renombrarImagen(req.file);
-    console.log(req.file, data);
-
+    
     // creamos una instancia del anuncio
     const anuncio = new Anuncio(data);
     

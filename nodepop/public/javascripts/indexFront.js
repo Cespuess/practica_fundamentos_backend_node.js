@@ -15,5 +15,8 @@ const imagen = document.getElementById('foto');
 
 imagen.addEventListener('change', e => {
   console.log(e.target.files[0]);
-  if (e.target.files[0].type !== 'image/jpeg' && e.target.files[0].type !== 'image/png') validador.innerHTML = 'Solo se aceptan imagenes con formatos .jpg, .jpeg y .png.'
+  if (e.target.files[0].type !== 'image/jpeg' && e.target.files[0].type !== 'image/png'){
+    validador.innerHTML = 'Solo se aceptan imagenes con formatos .jpg, .jpeg y .png.';
+    imagen.value = ''; // deseleccionamos el archivo que no es el requerido
+  }
 })
