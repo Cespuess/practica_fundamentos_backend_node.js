@@ -44,7 +44,7 @@ router.post('/',[validacionBodyTags, validacionBodyNombre, validacionBodyVenta, 
     // lo guardamos en la BD
     const anuncioGuardado = await anuncio.save();
 
-    res.send(`Anuncio guardado satisfactoriamente: \n ${anuncioGuardado }`);
+    res.json({anuncioCreado: anuncioGuardado});
   
     
   } catch (error) {
@@ -64,7 +64,7 @@ router.put('/:id', [validacionBodyTags, validacionBodyNombre, validacionBodyVent
 
     const anuncioActualizado = await Anuncio.findByIdAndUpdate( id, data, {new: true})
     
-    res.send(`Anuncio modificado satisfactioriamente \n ${anuncioActualizado}`);
+    res.json({anuncioModificado: anuncioActualizado});
 
   } catch (error) {
     next(error);
@@ -78,7 +78,7 @@ router.delete('/:id', async (req, res, next) => {
     const id = req.params.id;
     const producto = await Anuncio.find({_id: id});
     await Anuncio.deleteOne({_id: id});
-    res.send(`Producto "${producto[0].nombre}" eliminado.`)
+    res.json({productoEliminado: producto[0]})
   } catch (error) {
     next(error);
   }

@@ -140,22 +140,35 @@ Devuelve un array con los tags disponibles de los anuncios.
 
 * `POST /api/anuncios (body)`
 
+Para crear un anuncio tendremos que pasar los campos requeridos:
+1. `nombre:` tipo string.
+2. `venta:` tipo booleano, **true** para indicar que se vende, **false** para indicar que se compra.
+3. `precio:` tipo number.
+4. `foto:`tipo string.
+5. `tags:` tipo [string].
+
+
+
 Body:
 
 ![Cración anuncio](./nodepop/public/images/readme/crearAnuncio.png)
 
 Respuesta:
 
-```html
-Anuncio guardado satisfactoriamente:
+```json
 {
-  nombre: 'monitor',
-  venta: true,
-  precio: 300,
-  foto: 'monitor.jpg',
-  tags: [ 'work', 'lifestyle' ],
-  _id: new ObjectId('65dc93763a42132fb7e79100'),
-  __v: 0
+  "anuncioCreado": {
+      "nombre": "coche",
+      "venta": false,
+      "precio": 234,
+      "foto": "coche.jpg",
+      "tags": [
+          "motor",
+          "mobile"
+      ],
+      "_id": "65e0dfd9168c05b1ea4bf000",
+      "__v": 0
+  }
 }
 ```
 
@@ -163,22 +176,27 @@ Anuncio guardado satisfactoriamente:
 
 * `PUT /api/anuncios/<_id>  (body)`
 
+Para modificar el anuncio tendremos que indicar en la URL el _id del anuncio a modificar, y en el body los campos con los valores a actualizar.
+
 Body:
 
 ![Modificación anuncio](./nodepop/public/images/readme/modificarAnuncio.png)
 
 Respuesta:
 
-```html
-Anuncio modificado satisfactoriamente:
+```json
 {
-  nombre: 'avion',
-  venta: true,
-  precio: 300,
-  foto: 'monitor.jpg',
-  tags: [ 'lifestyle' ],
-  _id: new ObjectId('65dca5f9a9b88ee29187de50'),
-  __v: 0
+  "anuncioModificado": {
+      "_id": "65e0d8af808fa9fe424c0a36",
+      "nombre": "casa",
+      "venta": true,
+      "precio": 220,
+      "foto": "teclado.jpg",
+      "tags": [
+          "lifestyle"
+      ],
+      "__v": 0
+  }
 }
 ```
 
@@ -186,10 +204,24 @@ Anuncio modificado satisfactoriamente:
 
 * `DELETE /api/anuncios/<_id>`
 
+Para eliminar un anuncio tendremos que indicar en la URL el _id del anuncio a eliminar.
+
 ![Eliminación anuncio](./nodepop/public/images/readme/eliminarAnuncio.png)
 
-```html
-Producto "Fiat 500" eliminado.
+```json
+{
+  "productoEliminado": {
+      "_id": "65e0d8af808fa9fe424c0a36",
+      "nombre": "casa",
+      "venta": true,
+      "precio": 220,
+      "foto": "teclado.jpg",
+      "tags": [
+          "lifestyle"
+      ],
+      "__v": 0
+  }
+}
 ```
 
 ## WEB
@@ -241,6 +273,13 @@ No hace falta especificar el nombre entero, solo escribir una parte que contenga
 
 Esta opción no está disponible en la web, solo en la API.
 
+#### <u>Creación anuncio por formulario:</u>
+
+Podremos crear un anuncio desde la página web utilizando el formulario. Todos los campos son obligatorios, y se requiere seleccionar al menos una **categoría**. 
+En esta versión el campo `foto` tiene que ser de tipo string. Estamos trabajando para que en futuras versiones sea disponible subir la imagen. 
+
+![Formulario creación](./nodepop/public/images/readme/formulario_creacion.png)
+
 ## Registro de cambios
 
 ### v1.0.1
@@ -249,9 +288,6 @@ Esta opción no está disponible en la web, solo en la API.
 
 ### v1.1
 * Se ha implementado un formulario en la página web que permite la creación de nuevos anuncios. 
-* Todos los campos son obligatorios, y se requiere seleccionar al menos una **categoría**. 
-
-![Formulario creación](./nodepop/public/images/readme/formulario_creacion.png)
 
 ### v1.1.1
-* Se ha creado la ruta /api/anuncios/listatags que proporciona un array con los tags disponibles.
+* Se ha creado la ruta `/api/anuncios/listatags` que proporciona un array con los tags disponibles.
