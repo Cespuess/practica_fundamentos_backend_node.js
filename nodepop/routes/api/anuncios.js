@@ -74,10 +74,12 @@ router.delete('/:id', async (req, res, next) => {
     const producto = await Anuncio.find({_id: id});
     // borramos la foto del directorio images al eliminar el producto
     const rutaBorrar = path.join(__dirname, `../../public/images/${producto[0].foto}`);
-    fs.unlinkSync(rutaBorrar, (error) => {
-      console.log(error);
-      if (error) throw new Error('Problema al borrar la imagen.')
-    })
+    try {
+      fs.unlinkSync(rutaBorrar)      
+    } catch (error) {
+      throw new Error(`Problema al borrar la imagen: ${error}`)
+    }
+    
   
     await Anuncio.deleteOne({_id: id});
     res.send(`Producto "${producto[0].nombre}" eliminado.`)
