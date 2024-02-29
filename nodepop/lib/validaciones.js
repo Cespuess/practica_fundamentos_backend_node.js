@@ -31,7 +31,7 @@ const validacionTags = query('tags').custom(value => {
 // Validadores body------------------------------------------------------------------------------------------------------
 // Validamos tags que esten en la lista en peticiones 
 const validacionBodyTags = body('tags').custom(value => {
-  const arrayTags = ['work', 'lifestyle', 'motor', 'mobile']
+  const arrayTags = ['work', 'lifestyle', 'motor', 'mobile'];
   if (Array.isArray(value)) {
     if (value.every(tag => arrayTags.includes(tag))) return true;  
   } else {

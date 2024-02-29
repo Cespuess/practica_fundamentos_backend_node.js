@@ -119,6 +119,23 @@ Con este ejemplo recibimos solo los nombres de los productos sin el _id.
 }
 ```
 
+#### <u> Consultar los tags disponibles:</u>
+
+* `GET /api/anuncios/listatags`
+
+Devuelve un array con los tags disponibles de los anuncios.
+
+```json
+{
+  "resultado": [
+      "work",
+      "lifestyle",
+      "motor",
+      "mobile"
+  ]
+}
+```
+
 #### <u>Crear un anuncio:</u>
 
 * `POST /api/anuncios (body)`
@@ -235,3 +252,6 @@ Esta opción no está disponible en la web, solo en la API.
 * Todos los campos son obligatorios, y se requiere seleccionar al menos una **categoría**. 
 
 ![Formulario creación](./nodepop/public/images/readme/formulario_creacion.png)
+
+### v1.1.1
+* Se ha creado la ruta /api/anuncios/listatags que proporciona un array con los tags disponibles.

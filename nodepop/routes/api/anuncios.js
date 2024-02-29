@@ -20,6 +20,13 @@ async function (req, res, next) {
   }
 });
 
+// devuelve la lista de tags disponibles
+router.get('/listatags', function (req, res, next) {
+  const tagsDisponibles = ['work', 'lifestyle', 'motor', 'mobile'];
+  res.json({resultado: tagsDisponibles});
+});
+
+
 // POST /api/anuncios
 
 // crear un anuncio
