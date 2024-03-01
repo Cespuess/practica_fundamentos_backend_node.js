@@ -59,7 +59,7 @@ function listado(req, modelo) {
     filter.precio = res;  // priorizamos la búsqueda por rango por si se indica tambien el precio en la query.
   }
   if (filterByTags) {
-    filter.tags = filterByTags;
+    filter.tags = { $in : filterByTags };
   }
   
   const anuncios = modelo.listar(filter, skip, limit, sort, fields);
