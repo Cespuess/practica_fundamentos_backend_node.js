@@ -61,7 +61,7 @@ function listado(req, modelo) {
   if (filterByTags) {
     filter.tags = { $in : filterByTags };
   }
-  console.log(filter);
+  
   const anuncios = modelo.listar(filter, skip, limit, sort, fields);
    
   return anuncios;
