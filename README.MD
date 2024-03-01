@@ -293,3 +293,7 @@ En esta versión el campo `foto` tiene que ser de tipo string. Estamos trabajand
 * Se ha creado la ruta `/api/anuncios/listatags` que proporciona un array con los tags disponibles.
 * Se ha mejorado la búsqueda por tags.
 * Validadores convertidos en objetos para una mejor legibilidad del código.
+
+### v1.1.2
+
+* Se ha estilizado la página web.
